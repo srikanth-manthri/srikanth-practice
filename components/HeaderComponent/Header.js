@@ -1,20 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useSelector } from "react-redux";
 import {Link,NavLink} from "react-router-dom";
-
+import Cart from "../CartComponent/Cart";
 
 function Header(){
-  let totalPrice = 0;
-  let totalQuantity = 0;
-  const cartData=useSelector(state=>state.cartList);
-  cartData.forEach(cartLogo);
-  
-  function cartLogo(logo) {
-    console.log(logo.price,logo.id,"ooooooooooooo")
-    totalPrice = totalPrice + logo.price[logo.productId] * logo.quantity ; 
-    totalQuantity = totalQuantity + logo.quantity ;
-  }
+
   function overlay(isShow){
     var elm = document.querySelector('#overlay');
     if (isShow) {
@@ -39,13 +29,15 @@ function Header(){
 
 const width=[991];
 function resizefn(){
-if(window.innerWidth <=width[0]){
+if(window.innerWidth<=width[0]){
   closeSidebar();
 }
 else{
   return
 }
 }
+
+
 
   return(
 <header className="header">
@@ -74,7 +66,7 @@ else{
           <button className="sidebarCloseButton" onClick={closeSidebar}>
           <FontAwesomeIcon icon={['fas','times']}/>
           </button>
-          <NavLink onClick={resizefn} exact to="/home" className="nav-link">Home</NavLink>
+          <NavLink onClick={resizefn} exact to="/" className="nav-link">Home</NavLink>
           <NavLink onClick={resizefn} to="/shop" className="nav-link">Shop</NavLink>
           <NavLink onClick={resizefn} to="/blog" className="nav-link">Blog</NavLink>
           <NavLink  onClic={resizefn} to="/contact" className="nav-link">Contact</NavLink>
@@ -84,11 +76,11 @@ else{
         </div>
       </nav>
       <div className="cart">
-        <span className="total">{totalPrice}</span>
+        <span className="total"></span>
         <div className="cart-icon">
           <Link to="/cart" className="cart-button">
             <span  aria-label="shopping cart" role="img"> <FontAwesomeIcon icon={['fas','shopping-bag']}/></span></Link>
-             <span className="badge">{totalQuantity}</span>
+             <span className="badge">1</span>
         </div>
       </div>
     </header>

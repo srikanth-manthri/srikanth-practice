@@ -100,7 +100,7 @@ function MyAccount(props) {
           <button
             className="loginButton"
             type="submit"
-            disabled={!canUpdatePassword}
+            disabled = {!canUpdatePassword}
           >
             Update Password
           </button>

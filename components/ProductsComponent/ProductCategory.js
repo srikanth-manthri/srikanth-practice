@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { sorting } from '../../Redux/Action';
-
+import React from 'react';
 
 function ProductCategory(props){
-  useEffect(()=>{
-    dispatch(sorting("products")) 
-  },[])
-const dispatch = useDispatch();
-  const  handleSort= (e)=>{
-    const target = e.target.value
-    dispatch(sorting(target))
-  }
 return(
-  <div className="result-sorting" >
-    <select  id="sortigOrder" name="sortigOrder" onChange={handleSort}   >
-    <option  value="products">All Products</option>
-    <option value="products/category/jewelery">jewelery</option>
-    <option  value="products/category/electronics">electronics</option>
-    <option value="products/category/men's clothing">men's clothing</option>
-    <option value="products/category/women's clothing">women's clothing</option>
-    </select>
-    </div>
+  <div className="result-sorting">
+  <p>Showing 1-12 of 36 results</p>
+  <select id="sortigOrder" name="sortigOrder">
+    <option value="defaultSorting">Default sorting</option>
+    <option value="newest">Latest</option>
+    <option value="ascending">Ascending</option>
+    <option value="descending">Descending</option>
+  </select>
+</div>
 );
 }
 
