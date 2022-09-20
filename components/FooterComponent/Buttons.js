@@ -2,6 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Modal from "../OrderComponent/Modal";
+
+
 function Buttons(props) {
   const switchTheme = (e) => {
     if (e.target.checked) {

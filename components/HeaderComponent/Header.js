@@ -1,10 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useSelector } from "react-redux";
 import {Link,NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
+
 
 function Header(){
-
+  let totalPrice = 0;
+  let totalQuantity = 0;
+  const cartData=useSelector(state=>state.cartList);
+  cartData.forEach(cartLogo);
+  
+  function cartLogo(logo) {
+    console.log(logo.price,logo.id,"ooooooooooooo")
+    totalPrice = totalPrice + logo.price[logo.productId] * logo.quantity ; 
+    totalQuantity = totalQuantity + logo.quantity ;
+  }
   function overlay(isShow){
     var elm = document.querySelector('#overlay');
     if (isShow) {
@@ -29,22 +39,12 @@ function Header(){
 
 const width=[991];
 function resizefn(){
-if(window.innerWidth<=width[0]){
+if(window.innerWidth <=width[0]){
   closeSidebar();
 }
 else{
   return
 }
-}
-// src/pages/Home.js
-const cart = useSelector((state) => state.cart)
-
-const getTotalQuantity = () => {
-  let total = 0
-  cart.forEach(item => {
-    total += item.quantity
-  })
-  return total
 }
 
   return(
@@ -74,7 +74,7 @@ const getTotalQuantity = () => {
           <button className="sidebarCloseButton" onClick={closeSidebar}>
           <FontAwesomeIcon icon={['fas','times']}/>
           </button>
-          <NavLink onClick={resizefn} exact to="/" className="nav-link">Home</NavLink>
+          <NavLink onClick={resizefn} exact to="/home" className="nav-link">Home</NavLink>
           <NavLink onClick={resizefn} to="/shop" className="nav-link">Shop</NavLink>
           <NavLink onClick={resizefn} to="/blog" className="nav-link">Blog</NavLink>
           <NavLink  onClic={resizefn} to="/contact" className="nav-link">Contact</NavLink>
@@ -84,16 +84,11 @@ const getTotalQuantity = () => {
         </div>
       </nav>
       <div className="cart">
-        <span className="total">$320</span>
-
+        <span className="total">{totalPrice}</span>
         <div className="cart-icon">
-        
- 
-  <p>{getTotalQuantity() || 0}</p>
-
           <Link to="/cart" className="cart-button">
             <span  aria-label="shopping cart" role="img"> <FontAwesomeIcon icon={['fas','shopping-bag']}/></span></Link>
-             <span className="badge">2</span>
+             <span className="badge">{totalQuantity}</span>
         </div>
       </div>
     </header>
